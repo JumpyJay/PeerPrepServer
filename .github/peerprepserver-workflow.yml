@@ -27,4 +27,4 @@ jobs:
 
       - name: Build Server Docker Image
         run: |
-          docker build -f Dockerfile.server -t peerprep-server .
+          docker build -f Dockerfile -t peerprep-server .

@@ -156,6 +156,7 @@ io.on("connection", (socket: Socket) => {
 
   // listen for code changes
   socket.on("send-code", (delta: CodeDelta) => {
+    console.log("[socket] sending code");
     // find the room this socket is in but must not be socket id
     const room = Array.from(socket.rooms).find((r) => r !== socket.id);
 
