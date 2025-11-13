@@ -8,10 +8,18 @@ interface CodeDelta {
 
 const CORS_ORIGIN = process.env.WEBSOCKET_SERVER_CORS;
 console.log("My CORS Origin:", CORS_ORIGIN);
-
 const io = new Server(3001, {
   cors: {
-    origin: process.env.WEBSOCKET_SERVER_CORS,
+    origin: (origin, callback) => {
+      if (
+        origin === "http://localhost:3000" ||
+        origin === process.env.WEBSOCKET_SERVER_CORS
+      ) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["GET", "POST"],
   },
 });
